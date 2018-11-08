@@ -1,0 +1,67 @@
+// 切角效果 —— 直角纯色
+@mixin clip-corners($bg, $tl: 0, $tr: $tl, $br: $tl, $bl: $tr) {
+  background: $bg;
+  background:
+    linear-gradient(135deg, transparent $tl, $bg 0) top left,
+    linear-gradient(225deg, transparent $tr, $bg 0) top right,
+    linear-gradient(-45deg, transparent $br, $bg 0) bottom right,
+    linear-gradient(45deg, transparent $bl, $bg 0) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+// 切角效果 —— 直角多色
+@mixin clip-corners-colors($bg1, $bg2: $bg1, $bg3: $bg1, $bg4: $bg1, $tl: 0, $tr: $tl, $br: $tl, $bl: $tr) {
+  background: $bg1;
+  background:
+    linear-gradient(135deg, transparent $tl, $bg1 0) top left,
+    linear-gradient(225deg, transparent $tr, $bg2 0) top right,
+    linear-gradient(-45deg, transparent $br, $bg3 0) bottom right,
+    linear-gradient(45deg, transparent $bl, $bg4 0) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+// 切角效果 —— 圆角纯色
+@mixin clip-corners-radius($bg, $tl: 0, $tr: $tl, $br: $tl, $bl: $tr) {
+  background: $bg;
+  background:
+    radial-gradient(circle at top left, transparent $tl, $bg 0) top left,
+    radial-gradient(circle at top right, transparent $tr, $bg 0) top right,
+    radial-gradient(circle at bottom right, transparent $br, $bg 0) bottom right,
+    radial-gradient(circle at bottom left, transparent $bl, $bg 0) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+// 切角效果 —— 圆角多色
+@mixin clip-corners-radius-colors($bg1, $bg2: $bg1, $bg3: $bg1, $bg4: $bg1, $tl: 0, $tr: $tl, $br: $tl, $bl: $tr) {
+  background: $bg1;
+  background:
+    radial-gradient(circle at top left, transparent $tl, $bg1 0) top left,
+    radial-gradient(circle at top right, transparent $tr, $bg2 0) top right,
+    radial-gradient(circle at bottom right, transparent $br, $bg3 0) bottom right,
+    radial-gradient(circle at bottom left, transparent $bl, $bg4 0) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+// 折角效果
+@mixin folded-corner($bg, $size, $angle: 30deg) {
+  position: relative;
+  background: $bg;
+  background: linear-gradient($angle - 180deg, transparent $size, $bg 0);
+  border-radius: .5em;
+  $x: $size / sin($angle);
+  $y: $size / cos($angle);
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.2) 0, rgba(0,0,0,.4)) 100% 0 no-repeat;
+    width: $y;
+    height: $x;
+    transform: translateY($y - $x) rotate(2 * $angle - 90deg);
+    transform-origin: bottom right;
+    border-bottom-left-radius: inherit;
+    box-shadow: -.2em .2em .3em -.1em rgba(0, 0, 0, .2);
+  }
+}
+  
